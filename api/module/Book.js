@@ -16,7 +16,7 @@ const BookSchema = new Schema(
     },
     image: {
       type: String,
-      default: "bott.jpg",
+      default: "media/bott.jpg",
     },
   },
   {

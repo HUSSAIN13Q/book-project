@@ -4,6 +4,7 @@ const Book = require("../module/Book");
 
 const listBooks = async (req, res) => {
   try {
+    res.setHeader("Cache-Control", "no-store");
     const books = await Book.find();
     res.status(200).json(books);
   } catch (error) {
@@ -24,7 +25,9 @@ const listBookId = async (req, res) => {
 const createBook = async (req, res) => {
   try {
     if (req.file) {
-      req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
+      req.body.image = `${req.protocol}://${req.get("host")}/${
+        req.file ? req.file.path : "media/bott.jpg"
+      }`;
     }
     newBook = await Book.create(req.body);
     res.status(201).json(newBook);
